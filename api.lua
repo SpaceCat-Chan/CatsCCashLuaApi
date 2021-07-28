@@ -223,7 +223,7 @@ end
 ---@param user_name string
 ---@return boolean, integer, any
 function api.admin.delete_user(admin_name, admin_password, user_name)
-    local response_code, response = api.backend.request("DELETE", "v1/user/delete",
+    local response_code, response = api.backend.request("DELETE", "v1/admin/user/delete",
                                                         {name=admin_name, password=admin_password},
                                                         {{name=user_name}})
     return response_code == 204, response_code, response
