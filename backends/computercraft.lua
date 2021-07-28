@@ -56,6 +56,7 @@ function backend.request(method, url, auth, body)
     if body then
         enc_body = JSON:encode(body)
     end
+    print(enc_body)
     local full_url = server_address.."api/"..url
     http.request({method = method, url = full_url, headers = headers, body = enc_body})
     while true do
