@@ -72,7 +72,7 @@ end
 ---@param password string
 ---@return boolean, integer, any
 function api.verify_password(name, password)
-    local response_code, response = api.backend.request("POST", "v1/user/verify_password")
+    local response_code, response = api.backend.request("POST", "v1/user/verify_password", {name=name, password=password})
     return response_code == 204, response_code, response
 end
 
