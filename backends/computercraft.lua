@@ -57,7 +57,12 @@ function backend.request(method, url, auth, body)
         enc_body = "{"
         for _,v in ipairs(body) do
             local k,vv = next(v)
-            enc_body = enc_body.."\""..k.."\":"..tostring(vv)..","
+            if type(vv) == "string" then
+                enc_body = enc_body.."\""..k.."\":\""..vv.."\","
+
+            else
+                enc_body = enc_body.."\""..k.."\":"..tostring(vv)..","
+            end
         end
         enc_body = enc_body:sub(0, #enc_body-1)
         enc_body = enc_body.."}"
