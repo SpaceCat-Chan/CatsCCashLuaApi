@@ -3,6 +3,9 @@ local require_path = (...):match("(.-)[^%.]+$")
 
 local JSON = require(require_path.."JSON")
 
+JSON.onDecodeError = function() end
+JSON.onDecodeOfHTMLError = function() end
+
 local backend = {}
 
 local server_address
@@ -61,7 +64,8 @@ function backend.request(method, url, auth, body)
         elseif event == "http_success" and url_or_id == full_url then
             return handle_or_err_body.getResponseCode(), JSON:decode(handle_or_err_body.readAll())
         elseif event == "http_failure" and url_or_id == full_url then
-            return err_handle.getResponseCode(), JSON:decode(err_handle.readAll())
+            local all_text = err_handle.readAll()
+            return err_handle.getResponseCode(), JSON:decode(all_text) or all_text
         end
     end
 end
