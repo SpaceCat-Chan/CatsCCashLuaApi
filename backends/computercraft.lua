@@ -77,8 +77,13 @@ function backend.request(method, url, auth, body)
         elseif event == "http_success" and url_or_id == full_url then
             return handle_or_err_body.getResponseCode(), JSON:decode(handle_or_err_body.readAll())
         elseif event == "http_failure" and url_or_id == full_url then
-            local all_text = err_handle.readAll()
-            return err_handle.getResponseCode(), JSON:decode(all_text) or all_text
+            if err_handle then
+                local all_text = err_handle.readAll()
+                return err_handle.getResponseCode(), JSON:decode(all_text) or all_text
+            else
+                print(handle_or_err_body)
+                return 0, "unknown error"
+            end
         end
     end
 end
