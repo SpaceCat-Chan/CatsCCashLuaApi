@@ -49,7 +49,7 @@ local ignore_1
 function backend.request(method, url, auth, body)
     local headers = {Accept = "application/json", ["Content-Type"] = "application/json"}
     if auth then
-        headers["Authorization"] = enc(auth.name..":"..auth.password)
+        headers["Authorization"] = "Basic "..enc(auth.name..":"..auth.password)
     end
     local timer = os.startTimer(10)
     local enc_body
