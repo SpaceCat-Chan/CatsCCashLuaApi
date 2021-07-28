@@ -52,6 +52,7 @@ function backend.request(method, url, auth, body)
         enc_body = JSON:encode(body)
     end
     local full_url = server_address..url
+    print(full_url)
     http.request({method = method, url = full_url, headers = headers, body = enc_body})
     while true do
         local event, url_or_id, handle_or_err_body, err_handle = os.pullEvent()
