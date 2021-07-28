@@ -192,7 +192,7 @@ end
 function api.register(name, password)
     local response_code, response = api.backend.request("POST", "v1/user/register",
                                                         nil,
-                                                        {name=name, password= password})
+                                                        {name=name, pass= password})
     return response_code == 204, response_code, response
 end
 
