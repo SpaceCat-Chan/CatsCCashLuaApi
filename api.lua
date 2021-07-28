@@ -229,4 +229,14 @@ function api.admin.delete_user(admin_name, admin_password, user_name)
     return response_code == 204, response_code, response
 end
 
+if term then
+    local require_path = (...):match("(.-)[^%.]+$")
+    local computercraft = require(require_path.."backends.computercraft")
+    api.meta.force_backend(computercraft)
+else
+    if not CCASH_IGNORE_UNSUPPORTED_ENVIRONMENT then
+        error("non-computercraft environments are not currently supported\n(set global CCASH_IGNORE_UNSUPPORTED_ENVIRONMENT to true to ignore)")
+    end
+end
+
 return api
