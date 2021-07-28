@@ -205,7 +205,7 @@ end
 function api.admin.create_user(admin_name, admin_password, name, password, balance)
     local response_code, response = api.backend.request("POST", "v1/admin/user/register",
                                                         {name=admin_name, password=admin_password},
-                                                        {{name=name}, {pass=password}, {amount=balance}})
+                                                        {{name=name}, {amount=balance}, {pass=password}})
 
     return response_code == 204, response_code, response
 end
