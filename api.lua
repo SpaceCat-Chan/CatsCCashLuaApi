@@ -228,3 +228,5 @@ function api.admin.delete_user(admin_name, admin_password, user_name)
                                                         {name=user_name})
     return response_code == 204, response_code, response
 end
+
+return api
