@@ -3,7 +3,18 @@ api.admin = {}
 
 api.meta = {}
 
+local server_address
+
 function api.meta.set_server_address(address)
+    server_address = address
+    if api.backend then
+        api.backend.set_server_address(address)
+    end
+end
+
+function api.meta.force_backend(backend)
+    api.backend = backend
+    api.backend.set_server_address(server_address)
 end
 
 ---@param name string
