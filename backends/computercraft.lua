@@ -12,10 +12,12 @@ local server_address
 
 ---@param address string
 function backend.set_server_address(address)
-    if not address:sub(#address, #address) == "/" then
-        server_address = address.."/"
-    else
-        server_address = address
+    if address then
+        if not address:sub(#address, #address) == "/" then
+            server_address = address.."/"
+        else
+            server_address = address
+        end
     end
 end
 
