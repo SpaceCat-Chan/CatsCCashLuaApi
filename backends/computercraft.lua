@@ -54,7 +54,13 @@ function backend.request(method, url, auth, body)
     local timer = os.startTimer(10)
     local enc_body
     if body then
-        enc_body = JSON:encode(body)
+        enc_body = "{"
+        for _,v in ipairs(body) do
+            local k,vv = next(v)
+            enc_body = enc_body.."\""..k.."\":"..tostring(vv)..","
+        end
+        enc_body = enc_body:sub(0, #enc_body-1)
+        enc_body = enc_body.."}"
     end
     print(enc_body)
     local full_url = server_address.."api/"..url

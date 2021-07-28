@@ -59,7 +59,7 @@ end
 function api.send_funds(name, password, target, amount)
     local response_code, response = api.backend.request("POST", "v1/user/transfer",
                                                         {name=name,password=password},
-                                                        {name=target,amount=amount})
+                                                        {{name=target},{amount=amount}})
 
     local new_bal
     if response_code == 200 then
@@ -84,7 +84,7 @@ end
 function api.change_password(name, old_password, new_password)
     local response_code, response = api.backend.request("PATCH", "v1/user/change_password",
                                                         {name=name, password=old_password},
-                                                        {pass=new_password})
+                                                        {{pass=new_password}})
     return response_code == 204, response_code, response
 end
 
@@ -96,7 +96,7 @@ end
 function api.admin.change_password(admin_name, admin_password, user_name, new_user_password)
     local response_code, response = api.backend.request("PATCH", "v1/admin/user/change_password",
                                                         {name=admin_name, password=admin_password},
-                                                        {name=user_name, pass=new_user_password})
+                                                        {{name=user_name}, {pass=new_user_password}})
     return response_code == 204, response_code, response
 end
 
@@ -108,7 +108,7 @@ end
 function api.admin.set_bal(admin_name, admin_password, user_name, new_bal)
     local response_code, response = api.backend.request("PATCH", "v1/admin/set_balance",
                                                         {name=admin_name, password=admin_password},
-                                                        {name=user_name, amount=new_bal})
+                                                        {{name=user_name}, {amount=new_bal}})
     return response_code == 204, response_code, response
 end
 
@@ -120,7 +120,7 @@ end
 function api.admin.impact_bal(admin_name, admin_password, user_name, amount)
     local response_code, response = api.backend.request("POST", "v1/admin/impact_balance",
                                                         {name=admin_name, password=admin_password},
-                                                        {name=user_name, amount=amount})
+                                                        {{name=user_name}, {amount=amount}})
     local new_bal
     if response_code == 200 then
         new_bal = response
@@ -160,7 +160,7 @@ end
 function api.admin.prune_users(admin_name, admin_password, amount, opt_time)
     local response_code, response = api.backend.request("POST", "v1/admin/prune_users",
                                                         {name=admin_name, password=admin_password},
-                                                        {amount=amount, time=opt_time})
+                                                        {{amount=amount}, {time=opt_time}})
     local amount_deleted
     if response_code == 200 then
         amount_deleted = response
@@ -192,7 +192,7 @@ end
 function api.register(name, password)
     local response_code, response = api.backend.request("POST", "v1/user/register",
                                                         nil,
-                                                        {name=name, pass= password})
+                                                        {{name=name}, {pass=password}})
     return response_code == 204, response_code, response
 end
 
@@ -205,7 +205,7 @@ end
 function api.admin.create_user(admin_name, admin_password, name, password, balance)
     local response_code, response = api.backend.request("POST", "v1/admin/user/register",
                                                         {name=admin_name, password=admin_password},
-                                                        {name=name, pass=password, amount=balance})
+                                                        {{name=name}, {pass=password}, {amount=balance}})
 
     return response_code == 204, response_code, response
 end
@@ -225,7 +225,7 @@ end
 function api.admin.delete_user(admin_name, admin_password, user_name)
     local response_code, response = api.backend.request("DELETE", "v1/user/delete",
                                                         {name=admin_name, password=admin_password},
-                                                        {name=user_name})
+                                                        {{name=user_name}})
     return response_code == 204, response_code, response
 end
 
