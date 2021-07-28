@@ -182,7 +182,7 @@ function api.properties()
     if response_code == 200 then
         properties = response
     end
-    return properties
+    return properties, response_code, response
 end
 
 
