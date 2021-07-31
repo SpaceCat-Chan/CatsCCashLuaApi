@@ -70,7 +70,6 @@ function backend.request(method, url, auth, body)
         enc_body = enc_body:sub(0, #enc_body-1)
         enc_body = enc_body.."}"
     end
-    print(enc_body)
     local full_url = server_address.."api/"..url
     http.request({method = method, url = full_url, headers = headers, body = enc_body})
     while true do
@@ -84,7 +83,6 @@ function backend.request(method, url, auth, body)
                 local all_text = err_handle.readAll()
                 return err_handle.getResponseCode(), JSON:decode(all_text) or all_text
             else
-                print(handle_or_err_body)
                 return 0, "unknown error"
             end
         end
