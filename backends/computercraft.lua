@@ -3,7 +3,7 @@ if REQUIRE_REPLACEMENT then
     JSON = REQUIRE_REPLACEMENT("JSON.lua")
 else
     local require_path = (...):match("(.-)[^%.]+$")
-    local JSON = require(require_path.."JSON")
+    JSON = require(require_path.."JSON")
 end
 
 JSON.onDecodeError = function() end
