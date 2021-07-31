@@ -230,8 +230,14 @@ function api.admin.delete_user(admin_name, admin_password, user_name)
 end
 
 if term then
-    local require_path = (...):match("(.-)[^%.]+$")
-    local computercraft = require(require_path.."backends.computercraft")
+    local computercraft
+    if REQUIRE_REPLACEMENT then
+        computercraft = REQUIRE_REPLACEMENT("backends/computercraft.lua")
+    else
+        local require_path = (...):match("(.-)[^%.]+$")
+        computercraft = require(require_path.."backends.computercraft")
+    end
+
     api.meta.force_backend(computercraft)
 else
     if not CCASH_IGNORE_UNSUPPORTED_ENVIRONMENT then
