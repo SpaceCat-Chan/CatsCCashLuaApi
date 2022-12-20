@@ -190,8 +190,8 @@ function api.admin.prune_users(admin_name, admin_password, amount, opt_time)
 end
 
 ---@class properties
----@field version integer
 ---@field max_log integer
+---@field add_user_open boolean
 ---@field return_on_del string|nil
 local ignore_3
 
