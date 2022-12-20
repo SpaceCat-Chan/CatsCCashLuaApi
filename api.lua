@@ -51,6 +51,27 @@ function api.get_log(name, password)
     return log, response_code, response
 end
 
+---@class log_entry_v2
+---@field counterparty string
+---@field receiving boolean
+---@field amount integer
+---@field time integer
+local ignore_2
+
+---@param name string
+---@param password string
+---@return log_entry_v2[]|nil, integer, any
+function api.get_log_v2(name, password)
+    local response_code, response = api.backend.request("GET", "v2/user/log", {name = name, password = password})
+    
+    local log
+    if response_code == 200 then
+        log = response
+    end
+    
+    return log, response_code, response
+end
+
 ---@param name string
 ---@param password string
 ---@param target string
@@ -172,7 +193,7 @@ end
 ---@field version integer
 ---@field max_log integer
 ---@field return_on_del string|nil
-local ignore_2
+local ignore_3
 
 ---@return properties|nil
 function api.properties()
