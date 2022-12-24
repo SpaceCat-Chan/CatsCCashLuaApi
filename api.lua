@@ -53,7 +53,6 @@ end
 
 ---@class log_entry_v2
 ---@field counterparty string
----@field receiving boolean
 ---@field amount integer
 ---@field time integer
 local ignore_2
