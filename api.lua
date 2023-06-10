@@ -111,6 +111,20 @@ end
 ---@param admin_name string
 ---@param admin_password string
 ---@param user_name string
+---@return log_entry_v2[]|nil, integer, any
+function api.admin.get_log(admin_name, admin_password, user_name)
+    local response_code, response = api.backend.request("GET", "v1/admin/user/log?name="..user_name, {name=admin_name, password=admin_password})
+    local log
+    if response_code == 200 then
+        log = response
+    end
+    
+    return log, response_code, response
+end
+
+---@param admin_name string
+---@param admin_password string
+---@param user_name string
 ---@param new_user_password string
 ---@return boolean, integer, any
 function api.admin.change_password(admin_name, admin_password, user_name, new_user_password)
