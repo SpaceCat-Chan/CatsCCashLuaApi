@@ -208,7 +208,7 @@ end
 ---@field return_on_del string|nil
 local ignore_3
 
----@return properties|nil
+---@return properties|nil, integer, any
 function api.properties()
     local response_code, response = api.backend.request("GET", "properties")
 
