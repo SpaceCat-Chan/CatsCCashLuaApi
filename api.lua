@@ -205,6 +205,8 @@ end
 ---@class properties
 ---@field max_log integer
 ---@field add_user_open boolean
+---@field min_name_size integer
+---@field max_name_size integer
 ---@field return_on_del string|nil
 local ignore_3
 
